@@ -94,7 +94,6 @@ public class GiveMeAnExcuse {
         Random gen = new Random();
         
         //read password
-        System.out.println(GiveMeAnExcuse.class.getResourceAsStream("/key.lock"));
         Scanner	key = new Scanner(GiveMeAnExcuse.class.getResourceAsStream("key.lock"));
         pass = key.nextLine();
         key.close();
