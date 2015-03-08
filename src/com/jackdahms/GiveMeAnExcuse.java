@@ -64,11 +64,7 @@ public class GiveMeAnExcuse {
         Folder inbox = store.getFolder("INBOX");
         inbox.open(Folder.READ_ONLY);
         oldCount = inbox.getMessageCount();
-        
-        //for sending mail
-        MimeMessage message = new MimeMessage(session);  
-        
-        
+           
         while (alive) {
         	//detects new messages
         	newCount = inbox.getMessageCount();
@@ -80,21 +76,23 @@ public class GiveMeAnExcuse {
 	        		//read message
 	                Message msg = inbox.getMessage(inbox.getMessageCount() - i);
 	                Address[] in = msg.getFrom();
+                
+                	//send message
+                	MimeMessage message = new MimeMessage(session);  
 	                
-	                System.out.println("CONTENT:\n" + msg.getContent());
 	                for (Address address : in) {
-	                    System.out.println("FROM:\n" + address.toString());
+	                    System.out.println("FROM:" + address.toString());
 	                    
 	                    message.setFrom(new InternetAddress(from));
 	                    InternetAddress toAddress = new InternetAddress(address.toString());
-	                    message.addRecipient(Message.RecipientType.TO, toAddress);
+	                    message.setRecipient(Message.RecipientType.TO, toAddress);
 
-	                    message.setText(excuses.get(gen.nextInt(size))); //TODO get excuse
+	                    message.setText(excuses.get(gen.nextInt(size)));
 	                    
 	                    Transport transport = session.getTransport("smtp");
 	                    transport.connect("smtp.gmail.com", from, pass);
 	                    transport.sendMessage(message, message.getAllRecipients());
-	                    transport.close();
+	                    transport.close();	                    
 	                }
         		}
         	}
