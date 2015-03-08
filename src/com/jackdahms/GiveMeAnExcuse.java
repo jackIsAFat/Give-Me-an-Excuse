@@ -21,6 +21,13 @@ public class GiveMeAnExcuse {
 	private static String USER_NAME = "givemeanexcuse@gmail.com"; 
 	
     public static void main(String[] args) throws Exception{
+    	
+    	//create gui here
+    	
+    	start();
+    }
+    
+    public static void start() throws Exception{
     	//things that only need to be set once
         String from = USER_NAME;
         List<String> excuses = new ArrayList<String>();
