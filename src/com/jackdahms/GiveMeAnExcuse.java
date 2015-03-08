@@ -1,5 +1,7 @@
 package com.jackdahms;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,9 @@ public class GiveMeAnExcuse {
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	frame.setSize(800, 600);
     	frame.setLocationRelativeTo(null);
+    	
+    	Container pane = frame.getContentPane();
+    	pane.setLayout(new BorderLayout());
     	
     	//the last thing to do
     	frame.setVisible(true);
