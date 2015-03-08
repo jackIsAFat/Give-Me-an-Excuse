@@ -94,11 +94,10 @@ public class GiveMeAnExcuse {
         Random gen = new Random();
         
         //read password
-//        File f = new File("key.lock");
-//        System.out.println(f.exists());
-//        Scanner	key = new Scanner(GiveMeAnExcuse.class.getResourceAsStream("key.lock"));
-//        pass = key.nextLine();
-//        key.close();
+        System.out.println(GiveMeAnExcuse.class.getResourceAsStream("/key.lock"));
+        Scanner	key = new Scanner(GiveMeAnExcuse.class.getResourceAsStream("key.lock"));
+        pass = key.nextLine();
+        key.close();
         
         //read excuses
         Scanner excuse = new Scanner(new File("excuses.txt"));
