@@ -1,10 +1,8 @@
 package com.jackdahms;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -32,9 +30,14 @@ public class GiveMeAnExcuse {
 	
     public static void main(String[] args) throws Exception{
     	
-    	for (String arg : args)
-    		if (arg.equals("gui"))
+    	try {
+    		if (args[0].equals("nogui"))
+    			;
+    		else
     			createAndShowGUI();
+    	} catch (Exception e) {
+    		createAndShowGUI();
+    	}
     	
     	start();
     }
@@ -99,7 +102,7 @@ public class GiveMeAnExcuse {
         key.close();
         
         //read excuses
-        Scanner excuse = new Scanner(new File("excuses.txt"));
+        Scanner excuse = new Scanner(GiveMeAnExcuse.class.getResourceAsStream("excuses.txt"));
         while (excuse.hasNextLine())
         	excuses.add(excuse.nextLine());
         excuse.close();
