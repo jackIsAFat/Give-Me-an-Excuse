@@ -15,6 +15,7 @@ import javax.mail.Store;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JFrame;
 
 public class GiveMeAnExcuse {
 	
@@ -22,9 +23,21 @@ public class GiveMeAnExcuse {
 	
     public static void main(String[] args) throws Exception{
     	
-    	//one more test push
+    	createAndShowGUI();
     	
     	start();
+    }
+    
+    public static void createAndShowGUI() {
+    	//set up jframe
+    	JFrame frame = new JFrame();
+    	
+    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	frame.setSize(800, 600);
+    	frame.setLocationRelativeTo(null);
+    	
+    	//the last thing to do
+    	frame.setVisible(true);
     }
     
     public static void start() throws Exception{
