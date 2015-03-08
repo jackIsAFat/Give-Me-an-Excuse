@@ -17,11 +17,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
-
 public class GiveMeAnExcuse {
 	
-	private static String USER_NAME = "givemeanexcuse@gmail.com";  //TODO givemeanexcuse@jackdahms.com
+	private static String USER_NAME = "givemeanexcuse@gmail.com"; 
 	
     public static void main(String[] args) throws Exception{
     	//things that only need to be set once
