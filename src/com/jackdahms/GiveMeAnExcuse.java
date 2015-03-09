@@ -1,9 +1,14 @@
 package com.jackdahms;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -28,16 +33,14 @@ public class GiveMeAnExcuse {
 	
 	private static String USER_NAME = "givemeanexcuse@gmail.com"; 
 	
+	
     public static void main(String[] args) throws Exception{
     	
-    	try {
-    		if (args[0].equals("nogui"))
-    			;
-    		else
-    			createAndShowGUI();
-    	} catch (Exception e) {
+    	Arrays.sort(args);
+    	if (Arrays.binarySearch(args, "nogui") != -1)
+    		;
+    	else
     		createAndShowGUI();
-    	}
     	
     	start();
     }
@@ -78,6 +81,21 @@ public class GiveMeAnExcuse {
     	JPanel log = new JPanel();
     	title = BorderFactory.createTitledBorder("Log");  
     	log.setBorder(title);
+    	log.setLayout(new BorderLayout());
+    	
+    	JTextArea disp = new JTextArea();
+    	
+    	log.add(disp, BorderLayout.CENTER);
+    	
+    	JTextField comm = new JTextField();
+    	comm.setFont(new Font("courier", Font.PLAIN, 12));
+    	comm.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent e) {
+    			comm.setText("");
+    		}
+    	});
+    	log.add(comm, BorderLayout.PAGE_END);
+    	
     	pane.add(log, c);
     	
     	//the last thing to do
