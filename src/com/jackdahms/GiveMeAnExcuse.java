@@ -1,6 +1,7 @@
 package com.jackdahms;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -84,7 +85,7 @@ public class GiveMeAnExcuse {
     	log.setLayout(new BorderLayout());
     	
     	JTextArea disp = new JTextArea();
-    	
+    	disp.setBorder(BorderFactory.createLineBorder(Color.gray));
     	log.add(disp, BorderLayout.CENTER);
     	
     	JTextField comm = new JTextField();
