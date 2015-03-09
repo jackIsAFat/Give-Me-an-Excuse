@@ -27,10 +27,14 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 
 public class GiveMeAnExcuse {
@@ -55,7 +59,9 @@ public class GiveMeAnExcuse {
     	start();
     }
     
-    public static void createAndShowGUI() {
+    public static void createAndShowGUI() throws Exception{
+    	//set look and feel
+    	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
     	//set up jframe
     	JFrame frame = new JFrame();
     	
@@ -65,14 +71,82 @@ public class GiveMeAnExcuse {
     	frame.setResizable(false);
     	
     	Container pane = frame.getContentPane();
+    	pane.setLayout(new BoxLayout(pane, BoxLayout.X_AXIS));
+    	
+    	int statWidth = WIDTH / 4;
+    	
+    	JPanel stats = new JPanel();
+    	stats.setBorder(BorderFactory.createTitledBorder("Connected this session")); //TODO  rename title to "stats" once you've thought of some stats
+    	stats.setMaximumSize(new Dimension(statWidth, HEIGHT));
+    	stats.setLayout(new BoxLayout(stats, BoxLayout.Y_AXIS));
+    	
+    	JPanel numbers = new JPanel();
+    	
+    	JPanel session = new JPanel();
+    	session.setBorder(BorderFactory.createTitledBorder("Session"));
+    	session.setLayout(new GridLayout(1, 1));
+    	
+    	JTextArea players = new JTextArea();
+    	players.setFont(new Font("courier", Font.PLAIN, 12));
+    	players.setLineWrap(true);
+    	players.setWrapStyleWord(true);
+    	players.setEditable(false);
+    	JScrollPane playScroll = new JScrollPane(players);
+    	playScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    	
+//    	session.add(playScroll); //TODO uncomment these lines once you've thought of some stats
+    	
+//    	stats.add(numbers);
+//    	stats.add(session);
+    	
+    	stats.add(playScroll);
+    	
+    	JPanel log = new JPanel();
+    	log.setBorder(BorderFactory.createTitledBorder("Log"));
+    	log.setMaximumSize(new Dimension(WIDTH - statWidth, HEIGHT));
+    	log.setLayout(new BorderLayout());
+    	
+    	display = new JTextArea();
+    	display.setFont(new Font("courier", Font.PLAIN, 12));
+    	display.setLineWrap(true);
+    	display.setWrapStyleWord(true);
+    	display.setEditable(false);
+    	JScrollPane dispScroll = new JScrollPane(display);
+    	dispScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
     	
     	
+    	JTextField comm = new JTextField();
+    	comm.setFont(new Font("courier", Font.PLAIN, 12));
+    	comm.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent e) {
+    			command(comm.getText());
+    			comm.setText("");
+    		}
+    	});
+    	
+    	log.add(dispScroll, BorderLayout.CENTER);
+    	log.add(comm, BorderLayout.SOUTH);
+    	
+    	pane.add(stats);
+    	pane.add(log);
     	
     	frame.setVisible(true);
     }
     
-    public static void append(int code, String msg) {
+    public static void command(String msg) {
     	
+    	append(1, msg);
+    }
+    
+    public static void append(String msg) {
+    	append(0, msg);
+    }
+    
+    public static void append(int code, String msg) {
+    	switch(code) {
+    		case COMMAND: display.append("[COMMAND] "); break;
+    	}
+    	display.append(msg + "\n");
     }
     
     public static void start() throws Exception{
