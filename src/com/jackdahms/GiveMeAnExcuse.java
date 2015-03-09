@@ -3,9 +3,11 @@ package com.jackdahms;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -24,17 +26,24 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
+import javax.swing.border.Border;
 
 public class GiveMeAnExcuse {
 	
+	public static final int INFO = 0,
+							COMMAND = 1,
+							SEVERE = 2;
+	
 	private static String USER_NAME = "givemeanexcuse@gmail.com"; 
-	
-	
+	private static JTextArea display;
+		
+	private static int WIDTH = 850, HEIGHT = 550;
+		
     public static void main(String[] args) throws Exception{
     	
     	Arrays.sort(args);
@@ -51,56 +60,19 @@ public class GiveMeAnExcuse {
     	JFrame frame = new JFrame();
     	
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	frame.setSize(800, 600);
+    	frame.setSize(WIDTH, HEIGHT);
     	frame.setLocationRelativeTo(null);
+    	frame.setResizable(false);
     	
     	Container pane = frame.getContentPane();
-    	pane.setLayout(new GridBagLayout());
-    	GridBagConstraints c = new GridBagConstraints();
     	
-    	c.fill = GridBagConstraints.BOTH;
     	
-    	TitledBorder title;
     	
-    	c.gridx = 0;
-    	c.gridwidth = 2;
-    	c.weightx = .4;
-    	c.gridy = 0;
-    	c.weighty = 1;
-    	
-    	JPanel stats = new JPanel();
-    	title =  BorderFactory.createTitledBorder("Stats");
-    	stats.setBorder(title);
-    	pane.add(stats, c);
-    	
-    	c.gridx = c.gridwidth; //the old gridwidth
-    	c.gridwidth = 3;
-    	c.weightx = 1;
-    	c.gridy = 0;
-    	c.weighty = 1;
-    	
-    	JPanel log = new JPanel();
-    	title = BorderFactory.createTitledBorder("Log");  
-    	log.setBorder(title);
-    	log.setLayout(new BorderLayout());
-    	
-    	JTextArea disp = new JTextArea();
-    	disp.setBorder(BorderFactory.createLineBorder(Color.gray));
-    	log.add(disp, BorderLayout.CENTER);
-    	
-    	JTextField comm = new JTextField();
-    	comm.setFont(new Font("courier", Font.PLAIN, 12));
-    	comm.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e) {
-    			comm.setText("");
-    		}
-    	});
-    	log.add(comm, BorderLayout.PAGE_END);
-    	
-    	pane.add(log, c);
-    	
-    	//the last thing to do
     	frame.setVisible(true);
+    }
+    
+    public static void append(int code, String msg) {
+    	
     }
     
     public static void start() throws Exception{
